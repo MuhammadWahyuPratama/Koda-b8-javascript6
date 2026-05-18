@@ -1,5 +1,5 @@
-function wait(second, name) {
-    function iye(resolve, reject) {
+function queue(second, name) {
+    function wait(resolve, reject) {
         if (typeof second !== "number") {
             switch (typeof second) {
                 case "undefined": {
@@ -19,14 +19,14 @@ function wait(second, name) {
             resolve(name)
         }, second * 1000)
     }
-    return new Promise(iye)
+    return new Promise(wait)
 }
 
-wait(1.5, "John").then((output) => {
+queue(1.5, "John").then((output) => {
     console.log(output)
-    wait(2, "Ed").then((y) => {
+    queue(2, "Ed").then((y) => {
         console.log(y)
-        wait(0.5, "Jane").then((x) => {
+        queue(0.5, "Jane").then((x) => {
             console.log(x)
         })
     })
